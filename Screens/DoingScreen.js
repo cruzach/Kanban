@@ -2,11 +2,11 @@ import React from "react";
 import { View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import Task from './Task';
 import { SQLite } from 'expo';
-import { store } from './store';
+import { store } from '../Redux/store';
 
 const db = SQLite.openDatabase('kanban');
 
-export default class ToDoScreen extends React.Component {
+export default class DoingScreen extends React.Component {
     state = {
         list: store.getState().list,
     };
@@ -22,17 +22,17 @@ export default class ToDoScreen extends React.Component {
     getTodos = () => {
         db.transaction(
             tx => {
-              tx.executeSql('select * from todos where todoType = ?', ['todo'], (_, { rows }) => {
+              tx.executeSql('select * from todos where todoType = ?', ['doing'], (_, { rows }) => {
                 this.setState({list: rows._array})
               }, (err) => alert(err));
             },
             (err) => alert(err),
             null
-        )
+        );
     }
 
     static navigationOptions = {
-        headerTitle: 'To Do',
+        headerTitle: 'Doing',
     };
     
     renderItem = ({item}) => (
@@ -43,8 +43,8 @@ export default class ToDoScreen extends React.Component {
 
     render() {
         return (
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
-            <FlatList style={{ height: '100%', width: '95%', paddingTop: 10 }}
+        <View style={styles.container}>
+            <FlatList style={styles.list}
                 data={this.state.list}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => String(item.key)}
@@ -56,8 +56,13 @@ export default class ToDoScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-    searchField: {
-        padding: 10,
+    container: {
+        alignItems: "center", 
+        justifyContent: "center"
     },
-
+    list: {
+        height: '100%', 
+        width: '95%', 
+        paddingTop: 10
+    },
 });

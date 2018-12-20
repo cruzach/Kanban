@@ -2,13 +2,13 @@ import React from 'react';
 import { SQLite } from 'expo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from "react-navigation";
-import ToDoScreen from './ToDoScreen';
-import AddToDoScreen from './AddToDoScreen';
-import TaskDetailsScreen from './TaskDetailsScreen';
-import DoingScreen from './DoingScreen';
-import DoneScreen from './DoneScreen';
+import ToDoScreen from './Screens/ToDoScreen';
+import AddToDoScreen from './Screens/AddToDoScreen';
+import TaskDetailsScreen from './Screens/TaskDetailsScreen';
+import DoingScreen from './Screens/DoingScreen';
+import DoneScreen from './Screens/DoneScreen';
 import { Provider } from 'react-redux'
-import { store } from './store';
+import { store } from './Redux/store';
 
 const db = SQLite.openDatabase('kanban');
 

@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, FlatList, TouchableOpacity} from "react-native";
 import Task from './Task';
 import { SQLite } from 'expo';
-import { store } from './store';
+import { store } from '../Redux/store';
 
 const db = SQLite.openDatabase('kanban');
 
